@@ -1,0 +1,84 @@
+.addJobPage{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+}
+
+.sideBar{
+    flex: 2.5;
+    background-image: url('../assets/img/addJobSidebar.png');
+    background-size: 100% 100%;
+    /* background-repeat: no-repeat; */
+}
+
+.sideBar h1{
+    position: relative;
+    top: 3%;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+
+.addJob{
+    flex: 3;
+    padding: 3% 5%;
+    height: 100vh;
+}
+
+.addJobForm{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.inputBox{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.inputBox label{
+    flex: 2;
+    min-width: 150px;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+.inputBox input{
+    flex: 3;
+    min-width: 250px;
+    padding: 5px 15px;
+    border: 2px solid #c2c2c2;
+    border-radius: 4px;
+    color: #adadad;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.formActionButtons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.formActionButtons button{
+    width: 15vh;
+    min-width: 100px;
+    min-height: 40px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    border-radius: 7px;
+}
+
+.cancelButton{
+    background: none;
+    border: 1px solid #cecece;
+    color: #c2c2c2;
+}
+
+.addJobButton{
+    background: #ed5353;
+    border: none;
+    color: #ffffff;
+}
