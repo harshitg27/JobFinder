@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function NavBar() {
+    const navigate = useNavigate()
     const [token , setToken] = useState('')
     const handleLogout = ()=> {
         localStorage.setItem('userToken' , '')
@@ -20,8 +22,8 @@ function NavBar() {
                 <p>Hello! Recruiter</p>
             </div>: 
             <div className='auth'>
-                <button> Login </button>
-                <button> Register</button>
+                <button onClick={() => navigate('/login')} > Login </button>
+                <button onClick={() => navigate('/signup')} > Register</button>
             </div>}
         </div>
     )

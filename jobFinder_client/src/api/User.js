@@ -12,9 +12,9 @@ const Login = async (email , password) =>{
     }
 }
 
-const Register = async (name , email , mobile , password) =>{
+const Register = async (name , email , mobileNum , password) =>{
     try {
-        const response = await axios.post(`${BACKEND_ORIGIN_URL}/user/register` , {name , email , mobile , password})
+        const response = await axios.post(`${BACKEND_ORIGIN_URL}/user/register` , {name , email , mobileNum , password})
         // console.log(response.data)
         return response.data
     } catch (error) {

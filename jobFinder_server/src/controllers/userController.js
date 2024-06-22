@@ -60,7 +60,7 @@ function registerUser() {
             res.status(201).json({
                 status: 'Success',
                 message: 'User created successfully',
-                token: jwToken
+                userToken: jwToken
             });
 
         } catch (error) {
