@@ -7,7 +7,7 @@ const getJob = async () =>{
     try {
         const response = await axios.get(`${BACKEND_ORIGIN_URL}/job`)
         // console.log(response.data)
-        return response.data.jobs
+        return response.data
     } catch (error) {
         // console.log(error.response.data)
         return error.response.data
@@ -26,9 +26,19 @@ const getJobsByQuery = async(
             }
         } )
         console.log(response)
-        return response.data.jobs
+        return response.data
     } catch (error) {
         return error.response.data ;
     }
 }
-export {getJob , getJobsByQuery}
+const getJobBYId = async (id) =>{
+    try {
+        const response = await axios.get(`${BACKEND_ORIGIN_URL}/job/${id}`)
+        // console.log(response)
+        return response
+    } catch (error) {
+        console.log(error.response.data)
+        return error.response
+    }
+}
+export {getJob , getJobsByQuery , getJobBYId}

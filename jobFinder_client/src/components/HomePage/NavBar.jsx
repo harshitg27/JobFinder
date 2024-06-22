@@ -1,25 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import userAvatar from '../../assets/img/profile.png'
 
-function NavBar() {
+function NavBar({token , setToken}) {
     const navigate = useNavigate()
-    const [token , setToken] = useState('')
     const handleLogout = ()=> {
-        localStorage.setItem('userToken' , '')
+        localStorage.removeItem('userToken')
         setToken('')
     }
-    useEffect(()=>{
-        setToken(localStorage.getItem('userToken'))
-        // console.log('token' , token)
-    },[])
     return (
         <div className='navBar'>
-            <div><h4>Jobfinder</h4></div>
-            
-            
+            <div onClick={() => navigate('/')} ><h4>Jobfinder</h4></div>
             {token ? <div className='user'>
                 <p onClick={handleLogout}>Logout</p>
                 <p>Hello! Recruiter</p>
+                <img className='userProfile' src={userAvatar} alt='UserIcon' />
             </div>: 
             <div className='auth'>
                 <button onClick={() => navigate('/login')} > Login </button>

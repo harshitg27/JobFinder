@@ -6,6 +6,7 @@
     gap: 20px;
     position: relative;
     top: 16vh;
+    padding-bottom: 40px;
 }
 
 .filterJobs , .jobCard{
@@ -41,10 +42,11 @@
 .skillsSection{
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 #Skills{
-    min-height: 40px;
+    height: 40px;
     padding: 10px 25px;
     border: 2px solid #CECECE;
     border-radius: 7px;
@@ -69,9 +71,14 @@
     font-size: 1.25rem;
 }
 
-.addJobButton{
+.addJobPageButton{
     font-size: 1.5rem;
     font-weight: 500;
+    min-height: 40px;
+    background: none;
+    border: 2px solid #ed5353;
+    border-radius: 4px;
+    color: #ed5353;
 }
 
 
@@ -145,6 +152,8 @@
     color: #ffffff;
     border: none;
     border-radius: 4px;
+    font-weight: 500;
+    font-size: 1.25rem;
 }
 
 .rowFlex{

@@ -1,0 +1,25 @@
+.jobPage{
+    background: #FFEFEF;
+    
+}
+
+.jobDetailView{
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    width: 70%;
+    padding: 40px;
+    gap: 20px;
+}
+
+.skillShown{
+    min-width: 100px;
+    min-height: 35px;
+    background: #ffeeee;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-align: center;
+    color: #595959;
+    font-size: 1.5rem;
+    font-weight: 400;
+}

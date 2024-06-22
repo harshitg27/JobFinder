@@ -4,32 +4,27 @@ import JobCard from '../components/JobsPage/JobCard'
 import {getJob} from '../api/Job'
 import './JobsPage.css'
 
-function JobsPage() {
+function JobsPage({token}) {
   const [jobArr , setJobArr] = useState([])
   // getJob()
   const jobs = async () =>{
     try {
       const response = await getJob() ;
-      setJobArr(response)
+      setJobArr(response.jobs)
     } catch (error) {
-      
+      console.log(error)
     }
   }
   useEffect(()=>{
     jobs()
-    // console.log(jobArr , 'jobs')
-    // setJobArr(response)
   } , [])
-  useEffect(()=>{
-    console.log(jobArr , 'jobs')
-    // setJobArr(response)
-  } , [jobArr])
+  
   return (
     <div className='jobsPage'>
-      <FilterJobs setFilterJobs={setJobArr} />
+      <FilterJobs setFilterJobs={setJobArr} token={token} />
       {/* <JobCard /> */}
       {jobArr.map((job , index) =>{
-        return <JobCard key={index} job={job} />
+        return <JobCard key={index} job={job} token={token} />
       })}
     </div>
   )

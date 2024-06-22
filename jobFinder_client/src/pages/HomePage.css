@@ -34,5 +34,12 @@
 .user{
     display: flex;
     gap: 20px;
+    align-items: center;
     color: #ffffff;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.user img{
+    width: 40px;
 }

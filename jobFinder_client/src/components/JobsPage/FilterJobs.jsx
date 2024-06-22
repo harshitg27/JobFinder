@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import {getJobsByQuery} from '../../api/Job'
+import { useNavigate } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
 
 
-function FilterJobs({ setFilterJobs }) {
+function FilterJobs({ setFilterJobs , token }) {
+  const navigate = useNavigate()
   const skills = ['HTML', 'CSS', 'JavaScript', 'React.js', 'Node.js', 'Express.js']
   const [searchQuery, setSearchQuery] = useState('');
   const [skillsQuery, setSkillQuery] = useState([])
@@ -15,7 +18,9 @@ function FilterJobs({ setFilterJobs }) {
       console.log(error)
     }
   }
-  const token = localStorage.getItem('userToken')
+  // const tok = useSelector(store => store)
+  // console.log(tok)
+  // const token = localStorage.getItem('userToken')
   return (
     <div className='filterJobs'>
       <div className="searchBar">
@@ -35,18 +40,18 @@ function FilterJobs({ setFilterJobs }) {
                 return <p key={index} >{skill}</p>
               })}
             </div>
-            {token && <div>Clear</div>}
+            {/* {token && <div>Clear</div>} */}
           </div>
         </div>
-        <div>
-          {token && <button className='orangeButton addJobButton' >+ Add Job</button>}
-          {!token && <div style={{display: 'flex' , gap: '10px'}} >
+        <div style={{display: 'flex', flexDirection: 'column' , gap: '5px'  }}>
+          {token && <button onClick={() => navigate('/addjob')} className='addJobPageButton' >+ Add Job</button>}
+          <div style={{display: 'flex' , gap: '10px'}} >
             <button className='orangeButton' onClick={jobs}> Apply Filter </button>
             <button className='clearButton' onClick={()=> {
               setSkillQuery([]) 
               setSearchQuery('')
             } }> clear</button>
-          </div>}
+          </div>
 
         </div>
       </div>

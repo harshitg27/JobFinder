@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import './AddJobPage.css'
+import { useNavigate } from 'react-router-dom'
 
 function AddJobPage() {
+    const navigate = useNavigate()
     const [companyName, setCompanyName] = useState('')
     return (
         <div className='addJobPage'>
@@ -102,7 +104,7 @@ function AddJobPage() {
                         />
                     </div>
                     <div className='formActionButtons' >
-                        <button className='cancelButton'>Cancel</button>
+                        <button className='cancelButton' onClick={() => navigate('/')} >Cancel</button>
                         <button className='addJobButton'>+ Add Job</button>
                     </div>
                 </form>
