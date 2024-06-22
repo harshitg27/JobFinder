@@ -1,7 +1,7 @@
 const jobModel = require('../models/Job') ;
 
 function getJobById() {
-    return async (req, res) => {
+    return async (req, res , next) => {
         try {
             const jobId = req.params.id;
             const job = await jobModel.findById(jobId);

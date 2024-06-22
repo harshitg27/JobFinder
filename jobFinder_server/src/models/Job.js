@@ -47,10 +47,7 @@ const jobSchema = new mongoose.Schema({
     },
     authorUserId: {
         type: mongoose.ObjectId,
-    },
-    date: {
-        type: String,
-    },
+    }
 },
 { timestamps : {createdAt: "createdAt" , updatedAt: 'updatedAt'}}
 );
