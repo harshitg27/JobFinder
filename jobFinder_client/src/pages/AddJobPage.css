@@ -22,7 +22,7 @@
 
 .addJob{
     flex: 3;
-    padding: 3% 5%;
+    padding: 2% 5%;
     height: 100vh;
     overflow-y: scroll;
 }
@@ -41,20 +41,74 @@
     flex-wrap: wrap;
 }
 .inputBox label{
-    flex: 2;
+    width: 40%;
+    /* flex: 2; */
     min-width: 150px;
     font-size: 1.5rem;
     font-weight: 400;
 }
 .inputBox input , .inputBox textarea , .inputBox select  {
-    flex: 3;
+    /* flex: 3; */
+    width: 60%;
     min-width: 250px;
     padding: 5px 15px;
     border: 2px solid #c2c2c2;
     border-radius: 4px;
-    color: #adadad;
+    color: #000;
     font-size: 1rem;
     font-weight: 500;
+}
+.inputSkillBox{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.inputSkillBox label{
+    width: 40%;
+    min-width: 150px;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.skillInput{
+    width: 60%;;
+}
+.skillInput input{
+    height: 100%;
+    max-height: 40px;
+    /* flex: 0; */
+    /* height: 40px; */
+}
+
+.skillsdiv{
+    max-height: 30px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px 0;
+}
+.skillCard{
+    display: flex;
+    background: #ffeeee;
+    align-items: center;
+    justify-content: space-between;
+}
+.skillCard p{
+    min-width: 60px;
+    text-align: center;
+    font-size: .8rem;
+    font-weight: 500;
+    color: #000000;
+}
+.skillCard div{
+    background-color: #ff6b6b;
+    width: 25px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 0 2px 2px 0;
 }
 
 .formActionButtons{

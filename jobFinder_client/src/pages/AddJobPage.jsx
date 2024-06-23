@@ -1,36 +1,87 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './AddJobPage.css'
+import { getJobBYId } from '../api/Job'
 import { useNavigate } from 'react-router-dom'
 
 function AddJobPage() {
     const navigate = useNavigate()
-    const jobType = ['Full-Time' , 'Internship' , 'Part-Time']
-    const workType = ['Remote' , 'Office' , 'Hybrid']
-    const skills = []
     const [jobDetails, setJobDetails] = useState({
         companyName: "",
         logoUrl: "",
         jobTitle: "",
         monthlySalary: "",
         jobType: "",
-        remote : true,
-        location : "",
-        jobDescription : "",
-        aboutCompany : "" ,
-        skillsRequired : [],
-        additionalInformation : ""
+        remote: "",
+        location: "",
+        jobDescription: "",
+        aboutCompany: "",
+        skillsRequired: [],
+        additionalInformation: ""
     })
+    const [btnTitle, setBtnTitle] = useState('');
+    const [currentSkill, setCurrentSkill] = useState('')
+    const path = window.location.pathname.split('/')
+    useEffect(() => {
+        setBtnTitle('+ Add Job')
+        if (path[1] == 'updatejob') {
+            setBtnTitle('Update Job')
+            // console.log(path[2])
+            jobDetail(path[2])
+        }
+    }, [])
+
+    const jobDetail = async (jobId) => {
+        try {
+            const response = await getJobBYId(jobId);
+            if (response.status == 200) {
+                const { companyName, logoUrl, jobTitle, monthlySalary, jobType, remote, location, jobDescription, aboutCompany, skillsRequired, additionalInformation } = response.data.job
+                setJobDetails({
+                    companyName,
+                    logoUrl,
+                    jobTitle,
+                    monthlySalary,
+                    jobType,
+                    remote,
+                    location,
+                    jobDescription,
+                    aboutCompany,
+                    skillsRequired,
+                    additionalInformation
+                })
+                // setJob(response.data.job)
+            } else {
+                console.log('wrong job id')
+                setBtnTitle('+ Add Job')
+                navigate('/addjob')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handleOnKeyDown = (e) => {
+        if (e.key == 'Enter') {
+            if (jobDetails.skillsRequired.includes(currentSkill.trim())) {
+                alert('skill already added');
+                setCurrentSkill('')
+                return
+            }
+            setJobDetails({ ...jobDetails, skillsRequired: [...jobDetails.skillsRequired, currentSkill.trim()] })
+            setCurrentSkill('')
+        }
+    }
+
+    const jobType = ['Full-Time', 'Internship', 'Part-Time']
+    const workType = ['Remote', 'Office', 'Hybrid']
+    const skills = []
+
     return (
         <div className='addJobPage'>
             <section className='addJob' >
                 <div className='heading'>
                     <h1>Add job description</h1>
                 </div>
-                <form className='addJobForm' onSubmit={(e) => {
-                    e.preventDefault();
-                    console.log('submit')
-                    // validate()
-                }} >
+                <div className='addJobForm'  >
                     <div className='inputBox' >
                         <label >Company Name</label>
                         <input
@@ -38,8 +89,8 @@ function AddJobPage() {
                             name="companyName"
                             value={jobDetails.companyName}
                             placeholder="Enter Your Company name here"
-                            onChange={(e) =>{
-                                setJobDetails({...jobDetails , companyName:e.target.value})
+                            onChange={(e) => {
+                                setJobDetails({ ...jobDetails, companyName: e.target.value })
                             }}
                         />
                     </div>
@@ -49,7 +100,7 @@ function AddJobPage() {
                             type="text"
                             name="logoURL"
                             value={jobDetails.logoUrl}
-                            onChange={(e) => setJobDetails({...jobDetails , logoUrl:e.target.value})}
+                            onChange={(e) => setJobDetails({ ...jobDetails, logoUrl: e.target.value })}
                             placeholder="Enter the link"
                         />
                     </div>
@@ -59,7 +110,7 @@ function AddJobPage() {
                             type="text"
                             name="jobTitle"
                             value={jobDetails.jobTitle}
-                            onChange={(e) => setJobDetails({...jobDetails , jobTitle:e.target.value})}
+                            onChange={(e) => setJobDetails({ ...jobDetails, jobTitle: e.target.value })}
                             placeholder="Enter Job position"
                         />
                     </div>
@@ -69,29 +120,33 @@ function AddJobPage() {
                             type="number"
                             value={jobDetails.monthlySalary}
                             placeholder="Enter Amount in Rupee"
-                            onChange={(e) => setJobDetails({...jobDetails , monthlySalary:e.target.value})}
+                            onChange={(e) => setJobDetails({ ...jobDetails, monthlySalary: e.target.value })}
 
                         />
                     </div>
                     <div className='inputBox' >
                         <label >Job Type</label>
+
                         <select
-                            value={jobDetails.jobType}
-                            placeholder="Job Type"
-                            onChange={(e) => setJobDetails({...jobDetails , jobType:e.target.value})}
+                            // value={jobDetails.jobType}
+                            defaultValue={"select"}
+                            onChange={(e) => setJobDetails({ ...jobDetails, jobType: e.target.value })}
                         >
-                            {jobType.map((type , index) => {
-                                return <option key={index}>{type}</option>
+                            <option value='select' disabled>Select</option>
+                            {jobType.map((type, index) => {
+                                return <option key={index} value={type}>{type}</option>
                             })}
                         </select>
                     </div>
                     <div className='inputBox' >
                         <label >Remote/Office</label>
                         <select
-                            value={jobDetails.remote}
-                            onChange={(e) => setJobDetails({...jobDetails , remote:e.target.value})}
+                            // value={jobDetails.remote}
+                            defaultValue={'select'}
+                            onChange={(e) => setJobDetails({ ...jobDetails, remote: e.target.value })}
                         >
-                            {workType.map((type , index) => {
+                            <option value='select' disabled>Select</option>
+                            {workType.map((type, index) => {
                                 return <option key={index}>{type}</option>
                             })}
                         </select>
@@ -101,7 +156,7 @@ function AddJobPage() {
                         <input
                             type="text"
                             value={jobDetails.location}
-                            onChange={(e) => setJobDetails({...jobDetails , location:e.target.value})}
+                            onChange={(e) => setJobDetails({ ...jobDetails, location: e.target.value })}
                             placeholder="Enter Location"
                         />
                     </div>
@@ -110,7 +165,7 @@ function AddJobPage() {
                         <textarea
                             type="text"
                             value={jobDetails.jobDescription}
-                            onChange={(e) => setJobDetails({...jobDetails , jobDescription:e.target.value})}
+                            onChange={(e) => setJobDetails({ ...jobDetails, jobDescription: e.target.value })}
                             placeholder="Type the job description"
                         />
                     </div>
@@ -119,31 +174,41 @@ function AddJobPage() {
                         <input
                             type="text"
                             value={jobDetails.aboutCompany}
-                            onChange={(e) => setJobDetails({...jobDetails , aboutCompany:e.target.value})}
+                            onChange={(e) => setJobDetails({ ...jobDetails, aboutCompany: e.target.value })}
                             placeholder="Type about your company"
                         />
                     </div>
                     <div className='inputBox' >
                         <label >Skills Required</label>
-                        <input
-                            type="text"
-                            placeholder="Enter the must have skills"
-                        />
+                        <div className='skillInput'>
+                            <input style={{ width: '100%' }}
+                                type="text"
+                                value={currentSkill}
+                                placeholder="Enter the must have skills"
+                                onChange={(e) => setCurrentSkill(e.target.value)}
+                                onKeyDown={(e) => { handleOnKeyDown(e) }}
+                            />
+                            {jobDetails.skillsRequired.length >0 && <div className='skillsdiv'>
+                                { jobDetails.skillsRequired.map((skill, index) => {
+                                    return <div className='skillCard' key={index} ><p>{skill}</p><div>X</div></div>
+                                })}
+                            </div>}
+                        </div>
                     </div>
                     <div className='inputBox' >
                         <label >Information</label>
                         <input
                             type="text"
                             value={jobDetails.additionalInformation}
-                            onChange={(e) => setJobDetails({...jobDetails , additionalInformation:e.target.value})}
+                            onChange={(e) => setJobDetails({ ...jobDetails, additionalInformation: e.target.value })}
                             placeholder="Enter the additional information"
                         />
                     </div>
                     <div className='formActionButtons' >
                         <button className='cancelButton' onClick={() => navigate('/')} >Cancel</button>
-                        <button type='submit' className='addJobButton'>+ Add Job</button>
+                        <button type='submit' className='addJobButton'>{btnTitle}</button>
                     </div>
-                </form>
+                </div>
             </section>
             <section className='sideBar'>
                 <h1>Recrutier add job details here</h1>
