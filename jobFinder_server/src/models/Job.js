@@ -20,7 +20,7 @@ const jobSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    remote: {
+    workType: {
         type: String,
         required: true,
     },

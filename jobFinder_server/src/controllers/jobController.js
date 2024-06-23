@@ -28,14 +28,14 @@ function addNewJob() {
     return async (req, res, next) => {
         try {
             // console.log(req.user.email);
-            const { companyName, logoUrl, jobTitle, monthlySalary, jobType, remote, location, jobDescription, aboutCompany, skillsRequired, additionalInformation } = req.body;
+            const { companyName, logoUrl, jobTitle, monthlySalary, jobType, workType, location, jobDescription, aboutCompany, skillsRequired, additionalInformation } = req.body;
             const newJob = new jobModel({
                 companyName,
                 logoUrl,
                 jobTitle,
                 monthlySalary,
                 jobType,
-                remote,
+                workType,
                 location,
                 jobDescription,
                 aboutCompany,
@@ -61,7 +61,7 @@ function addNewJob() {
 function getFilteredJobs() {
     return async (req, res , next) => {
         try {
-            const { minSalary, maxSalary, jobTitle, location, remote, skills } = req.query;
+            const { minSalary, maxSalary, jobTitle, location, workType, skills } = req.query;
             const skillsArray = skills ? skills.split(',') : [];
             const jobs = await jobModel.find(
                 {
@@ -71,7 +71,7 @@ function getFilteredJobs() {
                     },
                     jobTitle: jobTitle || { $exists: true },
                     location: location || { $exists: true },
-                    remote: remote || { $exists: true },
+                    workType: workType || { $exists: true },
                 }
             );
 
@@ -85,8 +85,8 @@ function getFilteredJobs() {
 
             //Handle this in the mongoose query itself
             res.status(200).json({
-                message: 'Job route is working fine',
-                status: 'Working',
+                message: 'Filter Job is Ready',
+                status: 'Success',
                 jobs: finalJobs
             });
         } catch (error) {
@@ -98,7 +98,7 @@ function updateExistingJob(){
     return async (req, res , next) =>{
         try{
             const jobId = req.params.id ;
-            const { companyName, logoUrl, jobTitle, monthlySalary, jobType, remote, location, jobDescription, aboutCompany, skillsRequired, additionalInformation } = req.body;
+            const { companyName, logoUrl, jobTitle, monthlySalary, jobType, workType, location, jobDescription, aboutCompany, skillsRequired, additionalInformation } = req.body;
             console.log(req.body)
             const updatedJob = await jobModel.findByIdAndUpdate(jobId , {
                 companyName,
@@ -106,7 +106,7 @@ function updateExistingJob(){
                 jobTitle,
                 monthlySalary,
                 jobType,
-                remote,
+                workType,
                 location,
                 jobDescription,
                 aboutCompany,
