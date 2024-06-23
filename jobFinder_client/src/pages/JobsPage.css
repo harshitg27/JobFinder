@@ -61,6 +61,32 @@
     flex-wrap: wrap;
     align-items: center;
 }
+
+.skillsChip{
+    display: flex;
+    height: 40px;
+    background: #ffeeee;
+    align-items: center;
+    justify-content: space-between;
+}
+.skillsChip p{
+    min-width: 100px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000000;
+}
+.skillsChip div{
+    background-color: #ff6b6b;
+    height: 40px;
+    aspect-ratio: 1;
+    text-align: center;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    border-radius: 0 2px 2px 0;
+}
+
 .clearButton{
     background: none;
     min-width: 60px;

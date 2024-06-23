@@ -19,6 +19,7 @@ function App() {
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/job/:id' element={<JobPage />} />
         <Route path='/addjob' element={<AddJobPage />} />
+        <Route path='/updatejob/:id' element={<AddJobPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

@@ -35,7 +35,7 @@ function JobCard({job , token}) {
           })}
         </div>
         <div className='jobChanges' >
-          {token && <button onClick={() => navigate('/addjob')} className='editJob' >Edit job</button> }
+          {token && <button onClick={() => navigate(`/updatejob/${_id}`)} className='editJob' >Edit job</button> }
           <button className='orangeButton' onClick={() => navigate(`/job/${_id}`)} >View Details</button>
         </div>
       </div>

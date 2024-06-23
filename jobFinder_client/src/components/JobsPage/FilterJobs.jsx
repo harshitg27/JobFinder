@@ -37,7 +37,7 @@ function FilterJobs({ setFilterJobs , token }) {
           <div>
             <div className='skillsShown'>
               {skillsQuery.map((skill, index) => {
-                return <p key={index} >{skill}</p>
+                return <div className='skillsChip' key={index} ><p>{skill}</p><div>X</div></div>
               })}
             </div>
             {/* {token && <div>Clear</div>} */}

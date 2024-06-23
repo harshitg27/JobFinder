@@ -11,11 +11,12 @@ function NavBar({token , setToken}) {
     return (
         <div className='navBar'>
             <div onClick={() => navigate('/')} ><h4>Jobfinder</h4></div>
+            {/* ternart operator for showing login logout */}
             {token ? <div className='user'>
                 <p onClick={handleLogout}>Logout</p>
                 <p>Hello! Recruiter</p>
                 <img className='userProfile' src={userAvatar} alt='UserIcon' />
-            </div>: 
+            </div>  : 
             <div className='auth'>
                 <button onClick={() => navigate('/login')} > Login </button>
                 <button onClick={() => navigate('/signup')} > Register</button>
