@@ -11,13 +11,12 @@ function getJobById() {
                     message: 'job found',
                     job
                 });
-            } else {
+            } else{
                 res.status(400).json({
                     status: 'Failed',
                     message: 'job not Found'
                 });
             }
-
         } catch (error) {
             next("Error Finding Job", error);
         }
