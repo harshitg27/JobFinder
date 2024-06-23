@@ -12,8 +12,7 @@ function JobDetailView({ job, token }) {
         const minutes = Math.floor(seconds / 60);
       
         const hours = Math.floor(minutes / 60);
-        const days = Math.floor(hours / 24);
-      
+        const days = Math.floor(hours / 24);      
         const weeks = Math.floor(days / 7);
       
         if (weeks > 0) {
