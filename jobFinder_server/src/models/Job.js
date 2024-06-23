@@ -21,7 +21,7 @@ const jobSchema = new mongoose.Schema({
         required: true,
     },
     remote: {
-        type: Boolean,
+        type: String,
         required: true,
     },
     location: {

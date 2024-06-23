@@ -42,7 +42,6 @@ function addNewJob() {
                 skillsRequired,
                 additionalInformation,
                 authorUserId: req.id,
-                date: new Date().toLocaleDateString()
             });
             // console.log(newJob)
             await newJob.save();
@@ -61,7 +60,6 @@ function addNewJob() {
 
 function getFilteredJobs() {
     return async (req, res , next) => {
-
         try {
             const { minSalary, maxSalary, jobTitle, location, remote, skills } = req.query;
             const skillsArray = skills ? skills.split(',') : [];
@@ -73,10 +71,9 @@ function getFilteredJobs() {
                     },
                     jobTitle: jobTitle || { $exists: true },
                     location: location || { $exists: true },
-                    remote: remote == 'true' || { $exists: true },
+                    remote: remote || { $exists: true },
                 }
             );
-            console.log('skill Match' ,skills)
 
             const finalJobs = jobs.filter(job => {
                 let isSkillMatched = true;
@@ -116,7 +113,6 @@ function updateExistingJob(){
                 skillsRequired,
                 additionalInformation,
                 authorUserId: req.id,
-                date: new Date().toLocaleDateString()
             });
             // console.log(newJob)
             // await newJob.save();
