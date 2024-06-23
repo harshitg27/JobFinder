@@ -3,7 +3,8 @@ const validateNewJob = (req, res, next) => {
     //monthly salary, job type, remote, location, job description
     //about company, skills required, additional information
     const { companyName, logoUrl, jobTitle, monthlySalary, jobType, workType, location, jobDescription, aboutCompany, skillsRequired } = req.body;
-    if (!companyName || !logoUrl || !jobTitle || !monthlySalary || !jobType || workType || !location || !jobDescription || !aboutCompany || !skillsRequired) {
+    console.log(req.body)
+    if (!companyName || !logoUrl || !jobTitle || !monthlySalary || !jobType || !workType || !location || !jobDescription || !aboutCompany || !skillsRequired) {
         return res.status(400).json({
             message: 'Please provide all required fields',
         });
