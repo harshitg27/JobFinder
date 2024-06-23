@@ -46,6 +46,7 @@ function addNewJob() {
             // console.log(newJob)
             await newJob.save();
             res.status(201).json({
+                status: 'Success',
                 message: 'Job added successfully',
                 jobID: newJob._id
             });
@@ -85,7 +86,7 @@ function getFilteredJobs() {
 
             //Handle this in the mongoose query itself
             res.status(200).json({
-                message: 'Filter Job is Ready',
+                message: 'Fetch Job Succesfully',
                 status: 'Success',
                 jobs: finalJobs
             });
@@ -99,7 +100,7 @@ function updateExistingJob(){
         try{
             const jobId = req.params.id ;
             const { companyName, logoUrl, jobTitle, monthlySalary, jobType, workType, location, jobDescription, aboutCompany, skillsRequired, additionalInformation } = req.body;
-            console.log(req.body)
+            // console.log(req.body)
             const updatedJob = await jobModel.findByIdAndUpdate(jobId , {
                 companyName,
                 logoUrl,
@@ -117,6 +118,7 @@ function updateExistingJob(){
             // console.log(newJob)
             // await newJob.save();
             res.status(201).json({
+                status: 'Success',
                 message: 'Job updated successfully',
                 jobID: updatedJob._id
             });
@@ -131,7 +133,8 @@ function deleteJob(){
         try {
             const jobId = req.params.id ;
             await jobModel.findByIdAndDelete(jobId)
-            res.json({
+            res.status(201).json({
+                status: 'Success',
                 message: 'Job Delete Succesfully',
                 jobId
             })
