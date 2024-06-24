@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Login } from '../../api/User'
 import { useNavigate } from 'react-router-dom';
 
-function LoginForm({ setLogIn }) {
+function LoginForm() {
   const navigate = useNavigate()
   const [user, setUser] = useState({ email: '', password: '' })
   const [error, setError] = useState({ email: '', password: '' })
@@ -10,9 +10,11 @@ function LoginForm({ setLogIn }) {
     try {
       const response = await Login(user.email, user.password);
       // console.log(response)
-      if(response.status == 'Success'){
-        localStorage.setItem('userToken', response.userToken)
+      if(response.status == 200){
+        localStorage.setItem('userToken', response.data.userToken)
         navigate('/')
+      }else{
+        alert(response.data.message)
       }
 
     } catch (error) {
@@ -82,7 +84,7 @@ function LoginForm({ setLogIn }) {
 
         </form>
         <div className="signUpText">
-          <p>Don't have an account <span onClick={() => { setLogIn(false) }}>Sign Up</span></p>
+          <p>Don't have an account <span onClick={() => navigate('/signup')}>Sign Up</span></p>
         </div>
       </div>
     </div>

@@ -3,17 +3,19 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Register } from '../../api/User';
 
-function SignupForm({ setLogIn }) {
+function SignupForm() {
     const navigate = useNavigate()
     const [userDeatails, setUserDeatails] = useState({ name: '', password: '', email: '', mobile: '', policy: false })
     const [error, setError] = useState({ name: '', password: '', email: '', mobile: '', policy: false })
     const handleRegisterUser = async () => {
         try {
             const response = await Register(userDeatails.name, userDeatails.email, userDeatails.mobile, userDeatails.password);
-            if (response.status == 'Success') {
+            if (response.status == 201) {
                 setUserDeatails({ name: '', password: '', email: '', mobile: '', policy: false })
-                localStorage.setItem('userToken', response.userToken)
+                localStorage.setItem('userToken', response.data.userToken)
                 navigate('/')
+            }else{
+                alert(response.data.message)
             }
         } catch (error) {
             console.log(error)
@@ -140,7 +142,7 @@ function SignupForm({ setLogIn }) {
 
                     </form>
                     <div className="signUpText">
-                        <p>Already have an account <span onClick={() => { setLogIn(true) }}>Sign In</span></p>
+                        <p>Already have an account <span onClick={() => { navigate('/login') }}>Sign In</span></p>
                     </div>
                     {/* {redirect} */}
                 </div>

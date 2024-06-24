@@ -6,11 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 function FilterJobs({ setFilterJobs , token }) {
   const navigate = useNavigate()
-  const skills = ['HTML', 'CSS', 'JavaScript', 'React.js', 'Node.js', 'Express.js']
+  const skills = ['HTML', 'CSS', 'JavaScript', 'React.js', 'Node.js', 'Express.js' , 'MongoDB' , 'DSA' , 'DBMS' , 'OOPS' , 'Operating System']
   const [searchQuery, setSearchQuery] = useState('');
   const [skillsQuery, setSkillQuery] = useState([])
   const jobs = async () => {
-    console.log('click')
     try {
       const response = await getJobsByQuery(searchQuery , skillsQuery);
       if(response.status == 200){
