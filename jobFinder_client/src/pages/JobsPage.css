@@ -145,7 +145,7 @@
 }
 
 .skills{
-    /* justify-content: right; */
+    justify-content: right;
     flex-wrap: wrap;
     margin-left: 20px;
 }

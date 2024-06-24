@@ -13,7 +13,7 @@ function AddJobPage() {
         jobTitle: "",
         monthlySalary: "",
         jobType: "",
-        remote: "",
+        remote: "" ,
         location: "",
         jobDescription: "",
         aboutCompany: "",
@@ -80,13 +80,28 @@ function AddJobPage() {
         }
     }
 
+    const handleResponse = (response) => {
+        if (response.status == 201){
+            navigate(`/job/${response.data.jobID}`)
+        }else if( response.status == 401){
+            alert('User Not Verify For Adding Job LogIn Again')
+            localStorage.removeItem('userToken')
+            navigate(`/login`)
+        }else if( response.status == 400){
+            alert(response.data.message)
+        }
+    }
+
     const handleAddJob = async () =>{
+        // console.log(typeof jobDetails.monthlySalary)
         try {
-            const response = await addJob(jobDetails)
-            if (response.status == 201){
-                navigate(`/job/${response.data.jobID}`)
+            let response ;
+            if(path[1] == 'updatejob'){
+                response = await modifyJob(jobDetails , path[2])
+            }else{
+                response = await addJob(jobDetails)
             }
-            console.log(response)
+            handleResponse(response)
         } catch (error) {
             console.log(error)
         }
@@ -138,7 +153,7 @@ function AddJobPage() {
                             type="number"
                             value={jobDetails.monthlySalary}
                             placeholder="Enter Amount in Rupee"
-                            onChange={(e) => setJobDetails({ ...jobDetails, monthlySalary: e.target.value })}
+                            onChange={(e) => setJobDetails({ ...jobDetails, monthlySalary: Number(e.target.value) })}
 
                         />
                     </div>
