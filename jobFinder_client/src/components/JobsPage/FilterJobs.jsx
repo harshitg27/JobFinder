@@ -13,10 +13,24 @@ function FilterJobs({ setFilterJobs , token }) {
     console.log('click')
     try {
       const response = await getJobsByQuery(searchQuery , skillsQuery);
-      setFilterJobs(response)
+      if(response.status == 200){
+        setFilterJobs(response.data.jobs)
+      }
     } catch (error) {
       console.log(error)
     }
+  }
+  const removeskill = (idx) =>{
+    // skillsQuery.splice(idx , 1 )
+    // console.log(skillsQuery)
+    // const aa = skillsQuery
+    setSkillQuery(skillsQuery.filter((skill , index) => index !== idx))
+  }
+  const handleAddSkill = (skill) => {
+    if(skillsQuery.includes(skill)){
+      return
+    }
+    setSkillQuery([...skillsQuery , skill])
   }
   // const tok = useSelector(store => store)
   // console.log(tok)
@@ -28,7 +42,7 @@ function FilterJobs({ setFilterJobs , token }) {
       </div>
       <div className="filters">
         <div className='skillsSection' >
-          <select id="Skills" defaultValue={"skills"} onChange={ e => setSkillQuery([...skillsQuery , e.target.value])} >
+          <select id="Skills" defaultValue={"skills"} onChange={ e => handleAddSkill(e.target.value)} >
             <option value="skills" disabled  >Skills</option>
             {skills.map((skill, index) => {
               return <option key={index} value={skill} >{skill} </option>
@@ -37,7 +51,7 @@ function FilterJobs({ setFilterJobs , token }) {
           <div>
             <div className='skillsShown'>
               {skillsQuery.map((skill, index) => {
-                return <div className='skillsChip' key={index} ><p>{skill}</p><div>X</div></div>
+                return <div className='skillsChip' key={index} ><p>{skill}</p><div onClick={() => removeskill(index)}>X</div></div>
               })}
             </div>
             {/* {token && <div>Clear</div>} */}

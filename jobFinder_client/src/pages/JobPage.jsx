@@ -10,7 +10,7 @@ function JobPage() {
   const jobId = window.location.pathname.split('/').pop()
   const [job, setJob] = useState({});
   const [token, setToken] = useState(localStorage.getItem('userToken'))
-  const jobDetails = async () => {
+  const fetchJob = async () => {
     try {
       const response = await getJobBYId(jobId);
       if (response.status == 200) {
@@ -24,7 +24,7 @@ function JobPage() {
     }
   }
   useEffect(() => {
-    jobDetails()
+    fetchJob()
   }, [])
 
   return (
@@ -32,7 +32,7 @@ function JobPage() {
       <NavBar token={token} setToken={setToken} />
       {/* modify in job */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'center' , padding:'50px'}} >
-        <div style={{ height: '15vh' }}></div>
+        <div className='jobPageHeading' >{`${job.jobTitle} ${job.workType} ${job.jobType} At ${job.companyName}`}</div>
         <JobDetailView job={job} token={token} />
       </div>
       {/* <Heading /> */}

@@ -30,18 +30,22 @@ function AddJobPage() {
         }
     }, [])
 
+    const removeskill = (idx) => {
+        setJobDetails({ ...jobDetails, skillsRequired: jobDetails.skillsRequired.filter((skill , index) => index !== idx) })
+    }
+
     const jobDetail = async (jobId) => {
         try {
             const response = await getJobBYId(jobId);
             if (response.status == 200) {
-                const { companyName, logoUrl, jobTitle, monthlySalary, jobType, remote, location, jobDescription, aboutCompany, skillsRequired, additionalInformation } = response.data.job
+                const { companyName, logoUrl, jobTitle, monthlySalary, jobType, workType, location, jobDescription, aboutCompany, skillsRequired, additionalInformation } = response.data.job
                 setJobDetails({
                     companyName,
                     logoUrl,
                     jobTitle,
                     monthlySalary,
                     jobType,
-                    remote,
+                    workType,
                     location,
                     jobDescription,
                     aboutCompany,
@@ -171,7 +175,7 @@ function AddJobPage() {
                     </div>
                     <div className='inputBox' >
                         <label >About Company</label>
-                        <input
+                        <textarea
                             type="text"
                             value={jobDetails.aboutCompany}
                             onChange={(e) => setJobDetails({ ...jobDetails, aboutCompany: e.target.value })}
@@ -190,14 +194,14 @@ function AddJobPage() {
                             />
                             {jobDetails.skillsRequired.length >0 && <div className='skillsdiv'>
                                 { jobDetails.skillsRequired.map((skill, index) => {
-                                    return <div className='skillCard' key={index} ><p>{skill}</p><div>X</div></div>
+                                    return <div className='skillCard' key={index} ><p>{skill}</p><div onClick={() => removeskill(index)}>X</div></div>
                                 })}
                             </div>}
                         </div>
                     </div>
                     <div className='inputBox' >
                         <label >Information</label>
-                        <input
+                        <textarea
                             type="text"
                             value={jobDetails.additionalInformation}
                             onChange={(e) => setJobDetails({ ...jobDetails, additionalInformation: e.target.value })}

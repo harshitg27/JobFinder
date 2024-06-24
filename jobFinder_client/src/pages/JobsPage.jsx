@@ -10,7 +10,10 @@ function JobsPage({token}) {
   const jobs = async () =>{
     try {
       const response = await getJob() ;
-      setJobArr(response.jobs)
+      if(response.status == 200){
+        setJobArr(response.data.jobs)
+      }
+      
     } catch (error) {
       console.log(error)
     }

@@ -57,6 +57,11 @@
     color: #000;
     font-size: 1rem;
     font-weight: 500;
+    outline: none;
+}
+.inputBox textarea{
+    min-height: 100px;
+    resize: none;
 }
 .inputSkillBox{
     width: 100%;

@@ -4,9 +4,8 @@ import companyAvatar from '../../assets//img/company.png'
 
 function JobCard({job , token}) {
   const navigate = useNavigate()
-  const { logoUrl , jobTitle , monthlySalary , location , remote , jobType , skillsRequired , _id } = job
+  const { logoUrl , jobTitle , monthlySalary , location , workType , jobType , skillsRequired , _id } = job
   // const altIcon = 'https://img.freepik.com/premium-vector/anonymous-user-circle-icon-vector-illustration-flat-style-with-long-shadow_520826-1931.jpg'
-  const off = remote ? 'Remote' : 'Office'
   // const token = localStorage.getItem('userToken')
   // console.log(token)
   return (
@@ -23,7 +22,7 @@ function JobCard({job , token}) {
             <p>{location} </p>
           </div>
           <div className='rowFlex jobType'>
-            <h5>{off}</h5>
+            <h5>{workType}</h5>
             <h5>{jobType}</h5>
           </div>
         </div>

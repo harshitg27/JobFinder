@@ -7,7 +7,7 @@ const getJob = async () =>{
     try {
         const response = await axios.get(`${BACKEND_ORIGIN_URL}/job`)
         // console.log(response.data)
-        return response.data
+        return response
     } catch (error) {
         // console.log(error.response.data)
         return error.response.data
@@ -26,7 +26,7 @@ const getJobsByQuery = async(
             }
         } )
         console.log(response)
-        return response.data
+        return response
     } catch (error) {
         return error.response.data ;
     }

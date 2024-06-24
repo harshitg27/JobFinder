@@ -2,6 +2,17 @@
     background: #FFEFEF;
     
 }
+/* style={{ height: '15vh', marginTop: '10vh', background: '#ffffff', width:'70%', textAlign: 'center' }} */
+.jobPageHeading{
+    width: 70%;
+    margin-top: 10vh;
+    background: #ffffff;
+    text-align: center;
+    color: black;
+    font-weight: 500;
+    font-size: 1.75rem;
+    padding: 25px 60px;
+}
 
 .jobDetailView{
     display: flex;
