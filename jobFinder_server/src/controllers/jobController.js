@@ -62,7 +62,7 @@ function getFilteredJobs() {
     return async (req, res , next) => {
         try {
             const { minSalary, maxSalary, jobTitle, location, workType, skills } = req.query;
-            const skillsArray = skills ? skills.split(',') : [];
+            // const skillsArray = skills ? skills.split(',') : [];
             const jobs = await jobModel.find(
                 {
                     monthlySalary: {
@@ -77,8 +77,8 @@ function getFilteredJobs() {
 
             const finalJobs = jobs.filter(job => {
                 let isSkillMatched = true;
-                if (skillsArray.length > 0) {
-                    isSkillMatched = skillsArray.every(skill => job.skillsRequired.includes(skill));
+                if (skills.length > 0) {
+                    isSkillMatched = skills.every(skill => job.skillsRequired.includes(skill));
                 }
                 return isSkillMatched;
             });

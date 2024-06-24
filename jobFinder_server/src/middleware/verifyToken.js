@@ -5,7 +5,8 @@ const verifyToken = (req , res , next) =>{
         const token = req.header('Authorization').split(' ')[1] ;
         if(!token){
             return res.status(401).json({
-                message: 'Invalid Token'
+                status: 'Failed',
+                message: 'Token Not Found'
             })
         }
         const decoded = jwt.verify(token , process.env.JWT_Private_Key) ;
@@ -14,6 +15,7 @@ const verifyToken = (req , res , next) =>{
         next()
     }catch(error){
         return res.status(401).json({
+            status: 'Failed',
             message: 'Token Not Found ',
             error
         })
