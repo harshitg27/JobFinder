@@ -61,8 +61,11 @@ function addNewJob() {
 function getFilteredJobs() {
     return async (req, res , next) => {
         try {
-            const { minSalary, maxSalary, jobTitle, location, workType, skills } = req.query;
+            let { minSalary, maxSalary, jobTitle, location, workType, skills } = req.query;
             // const skillsArray = skills ? skills.split(',') : [];
+            if(!skills){
+                skills = []
+            }
             const jobs = await jobModel.find(
                 {
                     monthlySalary: {
@@ -74,7 +77,7 @@ function getFilteredJobs() {
                     workType: workType || { $exists: true },
                 }
             );
-
+            
             const finalJobs = jobs.filter(job => {
                 let isSkillMatched = true;
                 if (skills.length > 0) {
@@ -82,8 +85,6 @@ function getFilteredJobs() {
                 }
                 return isSkillMatched;
             });
-
-            //Handle this in the mongoose query itself
             res.status(200).json({
                 message: 'Fetch Job Succesfully',
                 status: 'Success',
