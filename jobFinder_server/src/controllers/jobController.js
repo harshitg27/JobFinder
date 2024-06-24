@@ -50,10 +50,8 @@ function addNewJob() {
                 jobID: newJob._id
             });
         } catch (error) {
-            next({
-                message: "Error Adding Job",
-                error
-            });
+            next( "Error Adding Job" , error)
+            
         }
     };
 }
