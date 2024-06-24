@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './AddJobPage.css'
-import { getJobBYId } from '../api/Job'
+import { getJobBYId , addJob , modifyJob } from '../api/Job'
 import { useNavigate } from 'react-router-dom'
 
 function AddJobPage() {
     const navigate = useNavigate()
+    // const token = localStorage.getItem('userToken')
+    // console.log(token)
     const [jobDetails, setJobDetails] = useState({
         companyName: "",
         logoUrl: "",
@@ -20,13 +22,16 @@ function AddJobPage() {
     })
     const [btnTitle, setBtnTitle] = useState('');
     const [currentSkill, setCurrentSkill] = useState('')
+    const jobType = ['Full-Time', 'Internship', 'Part-Time']
+    const workType = ['Remote', 'Office', 'Hybrid']
+    const suggestedSkills = []
     const path = window.location.pathname.split('/')
     useEffect(() => {
         setBtnTitle('+ Add Job')
         if (path[1] == 'updatejob') {
             setBtnTitle('Update Job')
             // console.log(path[2])
-            jobDetail(path[2])
+            getJobDetail(path[2])
         }
     }, [])
 
@@ -34,7 +39,7 @@ function AddJobPage() {
         setJobDetails({ ...jobDetails, skillsRequired: jobDetails.skillsRequired.filter((skill , index) => index !== idx) })
     }
 
-    const jobDetail = async (jobId) => {
+    const getJobDetail = async (jobId) => {
         try {
             const response = await getJobBYId(jobId);
             if (response.status == 200) {
@@ -75,9 +80,18 @@ function AddJobPage() {
         }
     }
 
-    const jobType = ['Full-Time', 'Internship', 'Part-Time']
-    const workType = ['Remote', 'Office', 'Hybrid']
-    const skills = []
+    const handleAddJob = async () =>{
+        try {
+            const response = await addJob(jobDetails)
+            if (response.status == 201){
+                navigate(`/job/${response.data.jobID}`)
+            }
+            console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     return (
         <div className='addJobPage'>
@@ -147,7 +161,7 @@ function AddJobPage() {
                         <select
                             // value={jobDetails.remote}
                             defaultValue={'select'}
-                            onChange={(e) => setJobDetails({ ...jobDetails, remote: e.target.value })}
+                            onChange={(e) => setJobDetails({ ...jobDetails, workType: e.target.value })}
                         >
                             <option value='select' disabled>Select</option>
                             {workType.map((type, index) => {
@@ -210,7 +224,7 @@ function AddJobPage() {
                     </div>
                     <div className='formActionButtons' >
                         <button className='cancelButton' onClick={() => navigate('/')} >Cancel</button>
-                        <button type='submit' className='addJobButton'>{btnTitle}</button>
+                        <button className='addJobButton'onClick={() => handleAddJob()} >{btnTitle}</button>
                     </div>
                 </div>
             </section>

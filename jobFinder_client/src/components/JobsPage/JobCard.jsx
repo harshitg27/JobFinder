@@ -14,7 +14,7 @@ function JobCard({job , token}) {
         <div className='companyImg'>
           <img src={logoUrl} alt={companyAvatar} width='50px'  height='50px' />
         </div >
-        <div className='column1' >
+        <div className='column1' style={{minWidth:'225px'}} >
           <h4>{jobTitle}</h4>
           <div className='rowFlex'>
             <p>11-50</p>
@@ -27,7 +27,7 @@ function JobCard({job , token}) {
           </div>
         </div>
       </div>
-      <div className='column'>
+      <div className='column' style={{alignItems:'flex-end'}}>
         <div className='rowFlex skills'>
           {skillsRequired.map((skill , index) =>{
             return <div className='skillLayout' key={index}>{skill}</div>

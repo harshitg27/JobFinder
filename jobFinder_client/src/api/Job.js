@@ -41,4 +41,29 @@ const getJobBYId = async (id) =>{
         return error.response
     }
 }
-export {getJob , getJobsByQuery , getJobBYId}
+const addJob = async (jobdata) =>{
+    try {
+        const token = localStorage.getItem('userToken')
+        console.log(token)
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        const response = await axios.post(`${BACKEND_ORIGIN_URL}/job/addJobs` , jobdata , config)
+        return response
+    } catch (error) {
+        console.log(error.response.data)
+        return error.response
+    }
+}
+const modifyJob = async (jobdata) =>{
+    try {
+        const response = await axios.post(`${BACKEND_ORIGIN_URL}/job/update/${id}` , jobdata)
+        return response
+    } catch (error) {
+        console.log(error.response.data)
+        return error.response
+    }
+}
+export {getJob , getJobsByQuery , getJobBYId , addJob , modifyJob}

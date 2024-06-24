@@ -56,7 +56,7 @@ function JobDetailView({ job, token }) {
 
             <div className="rowFlex" style={{ gap: '25px' }}>
                 <div>
-                    <p>Stipend</p>
+                    <p>{job.jobType == 'Internship' ? 'Stipend' : 'Salary'} </p>
                     <p>{`Rs ${job.monthlySalary}/month`} </p>
                 </div>
                 <div>
