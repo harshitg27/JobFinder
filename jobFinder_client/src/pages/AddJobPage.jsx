@@ -69,7 +69,8 @@ function AddJobPage() {
     }
 
     const handleOnKeyDown = (e) => {
-        if (e.key == 'Enter') {
+        console.log(e.key)
+        if (e.key == 'Enter' || e.key == 'Tab') {
             if (jobDetails.skillsRequired.includes(currentSkill.trim())) {
                 alert('skill already added');
                 setCurrentSkill('')
@@ -87,8 +88,10 @@ function AddJobPage() {
             alert('User Not Verify For Adding Job LogIn Again')
             localStorage.removeItem('userToken')
             navigate(`/login`)
-        }else if( response.status == 400){
+        }else if( response.status == 400 ){
             alert(response.data.message)
+        }else if(response.status == 403){
+            alert("You are Not Allowed For Edit this Job")
         }
     }
 

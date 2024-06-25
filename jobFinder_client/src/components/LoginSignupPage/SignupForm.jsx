@@ -125,7 +125,7 @@ function SignupForm() {
                                     ...prevState,
                                     password: e.target.value
                                 }))} />
-                            <p>{error.userName}</p>
+                            <p>{error.password}</p>
                         </div>
                         <div className="policy">
                             <input type="checkbox" name='checkbox' id='checkbox' checked={userDeatails.policy}
