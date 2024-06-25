@@ -97,6 +97,17 @@ function updateExistingJob(){
     return async (req, res , next) =>{
         try{
             const jobId = req.params.id ;
+            const job = await jobModel.findById(jobId);
+            const userIdFromJob = job.authorUserId ;
+            console.log('Req Id' , req.id)
+            console.log('User Id Saved in job' , userIdFromJob)
+            if(req.id != userIdFromJob ){
+                res.status(403).json({
+                    status:'Failed' ,
+                    message: 'You Are Not Authorize For Updation of this Job'
+                })
+                return ;
+            }
             const { companyName, logoUrl, jobTitle, monthlySalary, jobType, workType, location, jobDescription, aboutCompany, skillsRequired, additionalInformation } = req.body;
             // console.log(req.body)
             const updatedJob = await jobModel.findByIdAndUpdate(jobId , {
@@ -130,6 +141,17 @@ function deleteJob(){
     return async (req, res , next) =>{
         try {
             const jobId = req.params.id ;
+            const job = await jobModel.findById(jobId);
+            const userIdFromJob = job.authorUserId ;
+            console.log('Req Id' , req.id)
+            console.log('User Id Saved in job' , userIdFromJob)
+            if(req.id != userIdFromJob ){
+                res.status(403).json({
+                    status:'Failed' ,
+                    message: 'You Are Not Authorize For Updation of this Job'
+                })
+                return ;
+            }
             await jobModel.findByIdAndDelete(jobId)
             res.status(201).json({
                 status: 'Success',

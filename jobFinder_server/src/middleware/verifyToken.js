@@ -16,7 +16,7 @@ const verifyToken = (req , res , next) =>{
     }catch(error){
         return res.status(401).json({
             status: 'Failed',
-            message: 'Token Not Found ',
+            message: 'Token Not Found or Invalid Token ',
             error
         })
     }
