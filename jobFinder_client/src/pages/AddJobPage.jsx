@@ -106,6 +106,22 @@ function AddJobPage() {
             console.log(error)
         }
     }
+    const resetField = () => {
+        setJobDetails({
+            companyName: "",
+            logoUrl: "",
+            jobTitle: "",
+            monthlySalary: "",
+            jobType: "",
+            remote: "" ,
+            location: "",
+            jobDescription: "",
+            aboutCompany: "",
+            skillsRequired: [],
+            additionalInformation: ""
+        })
+        setCurrentSkill('')
+    }
 
 
     return (
@@ -239,6 +255,7 @@ function AddJobPage() {
                     </div>
                     <div className='formActionButtons' >
                         <button className='cancelButton' onClick={() => navigate('/')} >Cancel</button>
+                        <button className='addJobButton'onClick={() => resetField()} >Reset</button>
                         <button className='addJobButton'onClick={() => handleAddJob()} >{btnTitle}</button>
                     </div>
                 </div>

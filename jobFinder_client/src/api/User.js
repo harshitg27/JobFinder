@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BACKEND_ORIGIN_URL = 'http://localhost:4001'
+const BACKEND_ORIGIN_URL = 'https://jobfinder-jbhq.onrender.com'
 
 const Login = async (email , password) =>{
     try {
